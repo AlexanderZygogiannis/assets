@@ -33,13 +33,6 @@ export const assets = {
         .then((response) => response.data),
 
     /**
-     * API endpoint to update amenities
-     */
-    updateAsset:(id: string): Promise<IAsset> => axios
-        .put(`https://assignment.prosperty-mgmt.dev/v1/listings/${id}`)
-        .then((response) => response.data),
-
-    /**
      * API endpoint to fetch list of amenities
      */
     anemities:() => axios

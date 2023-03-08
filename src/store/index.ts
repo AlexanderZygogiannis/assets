@@ -43,8 +43,8 @@ export default new Vuex.Store({
       })
     },
 
-    async fetchTypes(context) {
-      await assets.types().then((response: ITypes) => {
+    fetchTypes(context) {
+      assets.types().then((response: ITypes) => {
         context.commit('setTypes', response)
       })
     },
@@ -60,7 +60,6 @@ export default new Vuex.Store({
         context.commit('setAssets', response)
       })
     }
-
   },
   modules: {
   }

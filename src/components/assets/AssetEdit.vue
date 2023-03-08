@@ -43,6 +43,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import moment from 'moment'
+import axios from 'axios';
 import { IAsset } from '@/interface/IAssets';
 import { PropType } from 'vue/types/v3-component-props';
 
@@ -50,18 +52,18 @@ export default Vue.extend({
     name: 'AssetItem',
     data: () => ({
         dialog: false,
-        valid: true,
         title: '',
         bathrooms: 0,
         bedrooms: 0,
         description: '',
-        floor: 0,
         postalCode: '',
         price: '',
         size: 0,
         street: '',
         streetNumber: '',
-        availableFrom: ''
+        availableFrom: '',
+        id: '0',
+        typeId: '0'
     }),
     props: {
         asset: {
@@ -74,26 +76,41 @@ export default Vue.extend({
             this.dialog = false
         },
         edit() {
-            const form = this.$refs.editForm as HTMLFormElement;
-            const formData = new FormData(form);
-
-            for (const [key, value] of formData) {
-                console.log('Key: ' + key + '| Value: ' + value)
+            let formData = {
+                title: this.title,
+                available_from: this.availableFrom,
+                bedrooms: this.bedrooms,
+                bathrooms: this.bathrooms,
+                description: this.description,
+                postal_code: this.postalCode,
+                price: this.price,
+                size: this.size,
+                street: this.street,
+                street_number: this.streetNumber,
+                type_id: this.typeId,
+                amenities: this.asset.amenities
             }
+
+            axios.put(`https://assignment.prosperty-mgmt.dev/v1/listings/${this.id}`, formData)
+                .then(() => {
+                    this.$store.dispatch('fetchAssets')
+                    this.closeDialog()
+                })
         }
     },
     created() {
+        this.id = this.asset.uuid
+        this.typeId = this.asset.type.uuid
         this.title = this.asset.title
-        this.bathrooms = this.asset.bathrooms
-        this.bedrooms = this.asset.bedrooms
-        this.description = this.asset.description
-        this.floor = this.asset.floor
         this.postalCode = this.asset.postal_code
         this.price = this.asset.price
         this.size = this.asset.size
         this.street = this.asset.street
         this.streetNumber = this.asset.street_number
-        this.availableFrom = this.asset.available_from
+        this.bathrooms = this.asset.bathrooms
+        this.bedrooms = this.asset.bedrooms
+        this.description = this.asset.description
+        this.availableFrom = moment(String(this.asset.available_from)).format('YYYY-MM-DD')
     }
 })
 </script>

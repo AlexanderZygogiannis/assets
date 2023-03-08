@@ -41,6 +41,7 @@ export default Vue.extend({
         selectedTypes(): void {
             // const mapped = Object.entries(this.selectedTypes).map(([k]) => (k + 1));
             // this.$store.dispatch('fetchTypeFilter', typeFilter)
+            this.selectedAmenities = []
         },
         /**
          * 
@@ -48,6 +49,7 @@ export default Vue.extend({
         selectedAmenities(): void {
             const anemitiesFilter = this.selectedAmenities.toString()
             this.$store.dispatch('fetchAmenitiesFilter', anemitiesFilter)
+            this.selectedTypes = []
         }
     }
 

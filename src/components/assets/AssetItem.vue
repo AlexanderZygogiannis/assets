@@ -21,11 +21,11 @@
             <div class="flex items-center pt-2 pb-2">
                 <div class="flex items-center mr-3">
                     <span class="text-sm font-semibold mr-3">Created:</span>
-                    <span class="flex items-center text-l">{{ asset.created_at }}</span>
+                    <span class="flex items-center text-l">{{ asset.created_at | formatDate }}</span>
                 </div>
                 <div class="flex items-center">
                     <span class="text-sm font-semibold mr-3">Updated:</span>
-                    <span class="flex items-center text-l">{{ asset.updated_at }}</span>
+                    <span class="flex items-center text-l">{{ asset.updated_at | formatDate }}</span>
                 </div>
             </div>
             <AssetEdit :asset="asset" />
@@ -38,6 +38,7 @@ import Vue from 'vue';
 import { IAsset } from '@/interface/IAssets';
 import { PropType } from 'vue/types/v3-component-props';
 import AssetEdit from './AssetEdit.vue';
+
 
 export default Vue.extend({
     name: 'AssetItem',
