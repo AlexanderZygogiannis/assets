@@ -15,6 +15,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { Types } from '@/constants/Types'
 
 export default Vue.extend({
     name: 'AssetFilter',
@@ -39,15 +40,18 @@ export default Vue.extend({
          * 
          */
         selectedTypes(): void {
-            // const mapped = Object.entries(this.selectedTypes).map(([k]) => (k + 1));
-            // this.$store.dispatch('fetchTypeFilter', typeFilter)
-            this.selectedAmenities = []
+            let mutationTypes = this.selectedTypes.map(val => Types[val])
+            const typeFilter = mutationTypes.toString()
+
+            this.$store.dispatch('fetchTypeFilter', typeFilter)
+            // this.selectedAmenities = []
         },
         /**
          * 
          */
         selectedAmenities(): void {
             const anemitiesFilter = this.selectedAmenities.toString()
+
             this.$store.dispatch('fetchAmenitiesFilter', anemitiesFilter)
             this.selectedTypes = []
         }
