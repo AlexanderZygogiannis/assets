@@ -1,32 +1,42 @@
 <template>
-    <v-dialog v-model="dialog" content-class="border-solid border-2 p-4 bg-white test">
+    <v-dialog v-model="dialog" content-class="border-solid border-2 p-4 bg-white max-w-md">
         <!-- Dialog Trigger -->
         <template #activator="{ on }">
-            <button v-ripple v-on="on">
+            <button class="absolute top-0 right-0 p-3 font-semibold " v-ripple v-on="on">
                 Edit
             </button>
         </template>
 
         <!-- Dialog Content -->
         <div>
+            <h3 class="mb-2 text-xl font-medium leading-tight">Edit Asset</h3>
             <form ref="editForm">
                 <v-text-field v-model="title" name='title' label='Title' required />
                 <v-text-field v-model="bathrooms" name="bathrooms" label='Bathrooms' required />
-                <!-- <v-text-field v-model="bedrooms" label='Bedrooms' required />
-            <v-text-field v-model="description" label='Description' required />
-            <v-text-field v-model="postalCode" label='Postal Code' required />
-            <v-text-field v-model="price" label='Price' required />
-            <v-text-field v-model="size" label='Size' required />
-            <v-text-field v-model="street" label='Street' required />
-            <v-text-field v-model="streetNumber" label='Street Number' required />
-            <v-text-field v-model="availableFrom" label='Available' required /> -->
-
+                <v-text-field v-model="bedrooms" label='Bedrooms' required />
+                <v-text-field v-model="description" label='Description' required />
+                <v-text-field v-model="postalCode" label='Postal Code' required />
+                <v-text-field v-model="price" label='Price' required />
+                <v-text-field v-model="size" label='Size' required />
+                <v-text-field v-model="street" label='Street' required />
+                <v-text-field v-model="streetNumber" label='Street Number' required />
+                <v-text-field v-model="availableFrom" label='Available' required />
             </form>
         </div>
 
-        <div>
-            <button @click="closeDialog">Close</button>
-            <button @click="edit">Save</button>
+        <div class="flex items-center justify-center">
+            <button
+                @click="closeDialog"
+                type="button"
+                class="inline-block rounded bg-primary text-white bg-blue-600 px-6 pt-2.5 pb-2  mr-5 text-xs font-medium uppercase leading-normal  shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]">
+                Close
+            </button>
+            <button
+                @click="edit"
+                type="button"
+                class="inline-block rounded bg-primary text-white bg-blue-600 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]">
+                Save
+            </button>
         </div>
     </v-dialog>
 </template>
@@ -35,7 +45,6 @@
 import Vue from 'vue';
 import { IAsset } from '@/interface/IAssets';
 import { PropType } from 'vue/types/v3-component-props';
-import { assets } from '@/api/assets';
 
 export default Vue.extend({
     name: 'AssetItem',
@@ -85,27 +94,6 @@ export default Vue.extend({
         this.street = this.asset.street
         this.streetNumber = this.asset.street_number
         this.availableFrom = this.asset.available_from
-
-        // axios.put(`https://assignment.prosperty-mgmt.dev/v1/listings/4e7694ca-84fb-419b-99ae-169fa2944008`, {
-        //     amenities: [
-        //         "Refrigerator",
-        //         "Microwave"
-        //     ],
-        //     : 2,
-        //     : 2,
-        //     : "Hello!",
-        //     : 0,
-        //     latitude: "21.12313",
-        //     longitude: "-13.2324",
-        //     : "12312",
-        //     : "200100.0000",
-        //     size: 703,
-        //     street: "Vivien Loafs",
-        //     street_number: "535",
-        //     title: "Test Detached 700sq.m",
-        //     type_id: 'ff28d0d0-1e62-47d8-b1cb-f96b538d86e5',
-        //     available_from: "2022-12-12"
-        // }).then((response) => console.log(2, response.data))
     }
 })
 </script>

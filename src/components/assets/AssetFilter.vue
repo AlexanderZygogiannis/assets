@@ -1,9 +1,15 @@
 <template>
     <div>
-        <div class="mb-5">Filters</div>
-        <v-select v-model="selectedAmenities" :items="amenities" attach chips label="Amenities" multiple />
-        <v-select v-model="selectedTypes" :items="types" item-text="name" item-value="" attach chips label="Types"
-            multiple />
+        <div class="font-semibold text-lg">Filters</div>
+        <div class="flex flex-col md:flex-row">
+            <div class="flex-1 p-2">
+                <v-select v-model="selectedAmenities" :items="amenities" attach chips label="Amenities" multiple />
+            </div>
+            <div class="flex-1 p-2">
+                <v-select v-model="selectedTypes" :items="types" item-text="name" item-value="" attach chips label="Types"
+                    multiple />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -25,8 +31,8 @@ export default Vue.extend({
         }
     },
     created() {
-        // this.$store.dispatch('fetchAmenities')
-        // this.$store.dispatch('fetchTypes')
+        this.$store.dispatch('fetchAmenities')
+        this.$store.dispatch('fetchTypes')
     },
     watch: {
         /**
@@ -40,11 +46,11 @@ export default Vue.extend({
          * 
          */
         selectedAmenities(): void {
-            // const anemitiesFilter = this.selectedAmenities.toString()
-            // this.$store.dispatch('fetchAmenitiesFilter', anemitiesFilter)
+            const anemitiesFilter = this.selectedAmenities.toString()
+            this.$store.dispatch('fetchAmenitiesFilter', anemitiesFilter)
         }
     }
 
 
 });
-</script>s
+</script>

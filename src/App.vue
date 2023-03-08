@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="antialiased bg-gray-200 text-gray-900 font-sans p-6">
     <Header />  
     <div class="container mx-auto p-4">
       <router-view />
