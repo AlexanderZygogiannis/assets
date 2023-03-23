@@ -56,11 +56,10 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue, { PropType } from "vue";
 import moment from "moment";
 import axios from "axios";
 import { IHouse } from "@/interface/IHouse";
-import { PropType } from "vue/types/v3-component-props";
 
 export default Vue.extend({
   name: "AssetItem",
@@ -80,7 +79,7 @@ export default Vue.extend({
     typeId: "0",
   }),
   props: {
-    asset: {
+    house: {
       required: true,
       type: Object as PropType<IHouse>,
     },
@@ -102,7 +101,7 @@ export default Vue.extend({
         street: this.street,
         street_number: this.streetNumber,
         type_id: this.typeId,
-        amenities: this.asset.amenities,
+        amenities: this.house.amenities,
       };
 
       axios
@@ -111,24 +110,24 @@ export default Vue.extend({
           formData
         )
         .then(() => {
-          this.$store.dispatch("fetchAssets");
+          this.$store.dispatch("fetchHouses");
           this.closeDialog();
         });
     },
   },
   created() {
-    this.id = this.asset.uuid;
-    this.typeId = this.asset.type.uuid;
-    this.title = this.asset.title;
-    this.postalCode = this.asset.postal_code;
-    this.price = this.asset.price;
-    this.size = this.asset.size;
-    this.street = this.asset.street;
-    this.streetNumber = this.asset.street_number;
-    this.bathrooms = this.asset.bathrooms;
-    this.bedrooms = this.asset.bedrooms;
-    this.description = this.asset.description;
-    this.availableFrom = moment(String(this.asset.available_from)).format(
+    this.id = this.house.uuid;
+    this.typeId = this.house.type.uuid;
+    this.title = this.house.title;
+    this.postalCode = this.house.postal_code;
+    this.price = this.house.price;
+    this.size = this.house.size;
+    this.street = this.house.street;
+    this.streetNumber = this.house.street_number;
+    this.bathrooms = this.house.bathrooms;
+    this.bedrooms = this.house.bedrooms;
+    this.description = this.house.description;
+    this.availableFrom = moment(String(this.house.available_from)).format(
       "YYYY-MM-DD"
     );
   },

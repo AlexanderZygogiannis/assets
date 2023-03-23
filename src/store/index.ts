@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { assets } from "@/api/assets";
+import { houses } from "@/api/houses";
 import { IHouse } from "@/interface/IHouse";
 import { ITypes } from "@/interface/ITypes";
 
@@ -8,7 +8,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    assets: [],
+    houses: [],
     amenities: [],
     types: [],
   },
@@ -16,47 +16,47 @@ export default new Vuex.Store({
   getters: {},
 
   mutations: {
-    setAssets: (state, assets) => {
-      state.assets = assets.data;
+    setHouses: (state, houses) => {
+      state.houses = houses.data;
     },
 
-    setAmenities: (state, assets) => {
-      state.amenities = assets.data;
+    setAmenities: (state, houses) => {
+      state.amenities = houses.data;
     },
 
-    setTypes: (state, assets) => {
-      state.types = assets.data;
+    setTypes: (state, houses) => {
+      state.types = houses.data;
     },
   },
 
   actions: {
-    fetchAssets(context) {
-      assets.fetchList().then((response: IHouse) => {
-        context.commit("setAssets", response);
+    fetchHouses(context) {
+      houses.fetchList().then((response: IHouse) => {
+        context.commit("setHouses", response);
       });
     },
 
     fetchAmenities(context) {
-      assets.anemities().then((response) => {
+      houses.anemities().then((response) => {
         context.commit("setAmenities", response);
       });
     },
 
     fetchTypes(context) {
-      assets.types().then((response: ITypes) => {
+      houses.types().then((response: ITypes) => {
         context.commit("setTypes", response);
       });
     },
 
     fetchTypeFilter(context, type) {
-      assets.fetchTypeList(type).then((response: IHouse) => {
-        context.commit("setAssets", response);
+      houses.fetchTypeList(type).then((response: IHouse) => {
+        context.commit("setHouses", response);
       });
     },
 
     fetchAmenitiesFilter(context, amenities) {
-      assets.fetchAnemitiesList(amenities).then((response: IHouse) => {
-        context.commit("setAssets", response);
+      houses.fetchAnemitiesList(amenities).then((response: IHouse) => {
+        context.commit("setHouses", response);
       });
     },
   },

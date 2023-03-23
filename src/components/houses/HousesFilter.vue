@@ -59,7 +59,7 @@ export default Vue.extend({
       const typeFilter = mutationTypes.toString();
 
       this.$store.dispatch("fetchTypeFilter", typeFilter);
-      // this.selectedAmenities = []
+      this.selectedAmenities = [];
     },
     /**
      *

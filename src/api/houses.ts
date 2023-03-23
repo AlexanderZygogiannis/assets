@@ -3,7 +3,7 @@ import { IHouse } from "@/interface/IHouse";
 import { ITypes } from "@/interface/ITypes";
 import { AxiosResponse } from "axios";
 
-export const assets = {
+export const houses = {
   /**
    * API endpoint to fetch assets list
    */
@@ -35,7 +35,7 @@ export const assets = {
   /**
    * API endpoint to fetch asset item
    */
-  asset: (id: string): Promise<IHouse> =>
+  house: (id: string): Promise<IHouse> =>
     axios
       .get(`https://assignment.prosperty-mgmt.dev/v1/listings/${id}`)
       .then((response) => response.data),
